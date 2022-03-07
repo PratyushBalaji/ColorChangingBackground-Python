@@ -1,4 +1,7 @@
 import pygame
+from cgitb import text
+from re import S
+import sys
 
 pygame.init()
 clock = pygame.time.Clock
@@ -16,9 +19,15 @@ while True:
                 sys.exit()
     mouseX, mouseY = pygame.mouse.get_pos()
 
-    r = int(254/mouseX + 1)
-    g = int(254/mouseY + 1)
-    b = int(254/mouseX + 1)
+    r = int(mouseX/7.6)
+    g = int(mouseY/7.6)
+    b = int(mouseX/7.6)
+    if r >= 255:
+        r = 255
+    if g >= 255:
+        g = 255
+    if b >= 255:
+        b = 255
     color = (r,g,b)
     white = (255,255,255)
     black = (0,0,0)
@@ -27,7 +36,6 @@ while True:
 
     font = pygame.font.Font("freesansbold.ttf",48)
     text = font.render("Color : "+str(r)+', '+str(g)+', '+str(b), False, white,black)
-    screen.blit(text)
+    screen.blit(text,(screen_width/2 - 48,screen_height-48))
 
     pygame.display.flip()
-    clock.tick(75)
